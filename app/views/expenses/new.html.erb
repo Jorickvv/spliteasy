@@ -1,0 +1,22 @@
+<h1>Add Expense</h1>
+
+<%= form_with model: [@group, @expense] do |form| %>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_field :description %>
+  </div>
+
+  <div>
+    <%= form.label :amount %>
+    <%= form.number_field :amount, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :split_rule %>
+    <%= form.select :split_rule, ["equal"] %>
+  </div>
+
+  <%= form.submit "Add Expense" %>
+
+<% end %>

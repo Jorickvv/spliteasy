@@ -10,8 +10,76 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 0) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_08_124931) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "debts", force: :cascade do |t|
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.integer "creditor_id"
+    t.integer "debtor_id"
+    t.bigint "expense_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["expense_id"], name: "index_debts_on_expense_id"
+    t.index ["group_id"], name: "index_debts_on_group_id"
+  end
+
+  create_table "expense_participants", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "expense_id", null: false
+    t.decimal "owed_amount"
+    t.decimal "paid_amount"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["expense_id"], name: "index_expense_participants_on_expense_id"
+    t.index ["user_id"], name: "index_expense_participants_on_user_id"
+  end
+
+  create_table "expenses", force: :cascade do |t|
+    t.decimal "amount"
+    t.datetime "created_at", null: false
+    t.string "description"
+    t.bigint "group_id", null: false
+    t.string "split_rule"
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_expenses_on_group_id"
+  end
+
+  create_table "group_users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "group_id", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "name"
+    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at"
+    t.string "reset_password_token"
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "debts", "expenses"
+  add_foreign_key "debts", "groups"
+  add_foreign_key "expense_participants", "expenses"
+  add_foreign_key "expense_participants", "users"
+  add_foreign_key "expenses", "groups"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
 end
