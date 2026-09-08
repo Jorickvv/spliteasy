@@ -1,0 +1,132 @@
+/* =========================
+   DEVISE / AUTH PAGES
+   ========================= */
+
+.auth-page {
+  min-height: 100vh;
+  background: #f8f9f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 460px;
+  text-align: center;
+}
+
+.auth-logo {
+  display: inline-block;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #1f2933;
+  text-decoration: none;
+}
+
+.auth-card {
+  background: white;
+  border: 1px solid #e6e9e5;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06);
+  text-align: left;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-header .eyebrow {
+  margin-bottom: 10px;
+}
+
+.auth-header h1 {
+  margin-bottom: 12px;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.auth-header p:last-child {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.6;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1px solid #d9ded8;
+  border-radius: 10px;
+  background: white;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #6b8f71;
+  box-shadow: 0 0 0 3px rgba(107, 143, 113, 0.12);
+}
+
+.auth-submit-button {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-top: 8px;
+  background: #1f2933;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-submit-button:hover {
+  opacity: 0.9;
+}
+
+.auth-divider {
+  text-align: center;
+  margin: 28px 0 18px;
+  color: #8a918b;
+  font-size: 14px;
+}
+
+.auth-secondary-button {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 13px 20px;
+  border: 1px solid #d9ded8;
+  border-radius: 10px;
+  color: #1f2933;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-secondary-button:hover {
+  background: #f5f6f4;
+}
+
+.auth-footer {
+  margin-top: 22px;
+  color: #8a918b;
+  font-size: 12px;
+}
