@@ -10,3 +10,391 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #24302b;
+  background: #ffffff;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+  padding: 22px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links a {
+  font-size: 15px;
+}
+
+.login-link {
+  font-weight: 500;
+}
+
+.signup-button {
+  background: #246b4b;
+  color: white;
+  padding: 11px 20px;
+  border-radius: 8px;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  padding: 100px 0;
+  background: #f5f8f5;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: 62px;
+  line-height: 1.05;
+  margin: 0 0 25px;
+}
+
+.hero-description {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #66736d;
+  max-width: 520px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.primary-button {
+  display: inline-block;
+  background: #246b4b;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.secondary-button {
+  display: inline-block;
+  padding: 14px 24px;
+  border: 1px solid #cfd8d2;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+
+/* =========================
+   BALANCE CARD
+========================= */
+
+.balance-card {
+  background: white;
+  width: 380px;
+  padding: 28px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.card-header h3 {
+  margin: 5px 0 0;
+}
+
+.small-text {
+  margin: 0;
+  color: #78827d;
+  font-size: 13px;
+}
+
+.positive-balance {
+  color: #246b4b;
+  font-weight: 700;
+}
+
+.person-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #e4eee8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.negative {
+  color: #c25b5b;
+}
+
+.positive {
+  color: #246b4b;
+}
+
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+  padding: 100px 0;
+}
+
+.section-heading {
+  max-width: 650px;
+  margin-bottom: 60px;
+}
+
+.section-heading h2 {
+  font-size: 42px;
+  margin: 10px 0 20px;
+}
+
+.section-heading p:last-child {
+  color: #66736d;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   STEPS
+========================= */
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+}
+
+.step-number {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: #246b4b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.step h3 {
+  font-size: 21px;
+}
+
+.step p {
+  color: #66736d;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   FEATURES
+========================= */
+
+.features-section {
+  padding: 100px 0;
+  background: #f5f8f5;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: white;
+  padding: 35px;
+  border-radius: 12px;
+}
+
+.feature-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 10px;
+  background: #e4eee8;
+  color: #246b4b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.feature-card p {
+  color: #66736d;
+  line-height: 1.6;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.cta-section {
+  padding: 100px 0;
+  text-align: center;
+}
+
+.cta-content h2 {
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.cta-content p {
+  color: #66736d;
+  margin-bottom: 30px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer {
+  border-top: 1px solid #eeeeee;
+  padding: 40px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer p {
+  color: #78827d;
+}
+
+.footer-links {
+  display: flex;
+  gap: 25px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+  .nav-links a:not(.login-link):not(.signup-button) {
+    display: none;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero h1 {
+    font-size: 44px;
+  }
+
+  .balance-card {
+    width: 100%;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 25px;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+  }
+}

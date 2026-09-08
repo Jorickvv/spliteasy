@@ -1,2 +1,287 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<<div class="home-page">
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+
+      <%= link_to "SplitEasy", root_path, class: "logo" %>
+
+      <div class="nav-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+
+        <%= link_to "Log in", new_user_session_path, class: "login-link" %>
+
+        <%= link_to "Sign up", new_user_registration_path, class: "signup-button" %>
+      </div>
+
+    </div>
+  </nav>
+
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-content">
+
+      <div class="hero-text">
+
+        <p class="eyebrow">
+          SIMPLE EXPENSE SHARING
+        </p>
+
+        <h1>
+          Split expenses.<br>
+          Keep friendships easy.
+        </h1>
+
+        <p class="hero-description">
+          Split bills with friends, roommates and travel groups
+          without the awkward math.
+        </p>
+
+        <div class="hero-buttons">
+
+          <%= link_to "Get started", new_user_registration_path,
+              class: "primary-button" %>
+
+          <a href="#how-it-works" class="secondary-button">
+            See how it works
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Example balance card -->
+      <div class="balance-card">
+
+        <div class="card-header">
+          <div>
+            <p class="small-text">Weekend Trip</p>
+            <h3>Your balance</h3>
+          </div>
+
+          <span class="positive-balance">
+            +€45.00
+          </span>
+        </div>
+
+        <div class="person-row">
+          <div class="person">
+            <div class="avatar">S</div>
+            <span>Leo</span>
+          </div>
+
+          <span class="negative">
+            owes you €30
+          </span>
+        </div>
+
+        <div class="person-row">
+          <div class="person">
+            <div class="avatar">J</div>
+            <span>Jorick</span>
+          </div>
+
+          <span class="negative">
+            owes you €15
+          </span>
+        </div>
+
+        <div class="person-row">
+          <div class="person">
+            <div class="avatar">M</div>
+            <span>Deniss</span>
+          </div>
+
+          <span class="positive">
+            you owe €0
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- How it works -->
+  <section class="section" id="how-it-works">
+
+    <div class="container">
+
+      <div class="section-heading">
+        <p class="eyebrow">HOW IT WORKS</p>
+
+        <h2>
+          No more complicated math.
+        </h2>
+
+        <p>
+          SplitEasy keeps track of who paid, who owes,
+          and how much everyone needs to pay back.
+        </p>
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+
+          <h3>Create a group</h3>
+
+          <p>
+            Create a group for your trip, apartment,
+            dinner or anything else.
+          </p>
+        </div>
+
+
+        <div class="step">
+          <div class="step-number">2</div>
+
+          <h3>Add an expense</h3>
+
+          <p>
+            Enter what you paid and choose the people
+            who shared the expense.
+          </p>
+        </div>
+
+
+        <div class="step">
+          <div class="step-number">3</div>
+
+          <h3>See who owes who</h3>
+
+          <p>
+            SplitEasy calculates everyone's share
+            automatically.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- Features -->
+  <section class="features-section" id="features">
+
+    <div class="container">
+
+      <div class="section-heading">
+        <p class="eyebrow">FEATURES</p>
+
+        <h2>
+          Everything you need to split expenses.
+        </h2>
+      </div>
+
+
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <div class="feature-icon">€</div>
+
+          <h3>Track balances</h3>
+
+          <p>
+            Always know how much you owe
+            and how much you're owed.
+          </p>
+        </div>
+
+
+        <div class="feature-card">
+          <div class="feature-icon">+</div>
+
+          <h3>Add expenses</h3>
+
+          <p>
+            Quickly record dinner, rent,
+            travel and everyday expenses.
+          </p>
+        </div>
+
+
+        <div class="feature-card">
+          <div class="feature-icon">↔</div>
+
+          <h3>Split fairly</h3>
+
+          <p>
+            Split expenses equally and see
+            everyone's share instantly.
+          </p>
+        </div>
+
+
+        <div class="feature-card">
+          <div class="feature-icon">✓</div>
+
+          <h3>Settle up</h3>
+
+          <p>
+            Keep track of payments and
+            settle your debts when you're ready.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CTA -->
+  <section class="cta-section">
+
+    <div class="container cta-content">
+
+      <h2>
+        Ready to stop doing the math?
+      </h2>
+
+      <p>
+        Create your first group and start splitting expenses.
+      </p>
+
+      <%= link_to "Create your free account",
+          new_user_registration_path,
+          class: "primary-button" %>
+
+    </div>
+
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+      <div>
+        <%= link_to "SplitEasy", root_path, class: "logo" %>
+
+        <p>
+          Less math. More time together.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <%= link_to "Log in", new_user_session_path %>
+        <%= link_to "Sign up", new_user_registration_path %>
+      </div>
+
+    </div>
+
+  </footer>
+
+</div>
