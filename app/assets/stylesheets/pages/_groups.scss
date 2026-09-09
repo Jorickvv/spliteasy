@@ -1,0 +1,281 @@
+/* =========================
+   GROUP PAGES
+========================= */
+.group-balance {
+  margin: 20px 0 0;
+  font-size: 18px;
+  color: #66736d;
+}
+
+.group-balance strong {
+  margin-left: 5px;
+  color: #246b4b;
+  font-size: 24px;
+}
+
+.group-balance.negative strong {
+  color: #b34d4d;
+} 
+
+.group-page {
+  min-height: calc(100vh - 80px);
+  padding: 90px 0;
+  background: #f5f8f5;
+}
+
+.group-form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.group-form-card {
+  width: 100%;
+  max-width: 560px;
+  background: white;
+  padding: 45px;
+  border-radius: 16px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.07);
+}
+
+.group-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 15px;
+  color: #246b4b;
+}
+
+.group-form-card h1,
+.group-header h1 {
+  font-size: 42px;
+  line-height: 1.1;
+  margin: 0 0 18px;
+  color: #24302b;
+}
+
+.group-description {
+  color: #66736d;
+  font-size: 17px;
+  line-height: 1.6;
+  margin-bottom: 35px;
+}
+
+.group-field {
+  margin-bottom: 25px;
+}
+
+.group-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 9px;
+  color: #24302b;
+}
+
+.group-field input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #cfd8d2;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.group-field input:focus {
+  border-color: #246b4b;
+  box-shadow: 0 0 0 3px rgba(36, 107, 75, 0.1);
+}
+
+.group-primary-button {
+  display: inline-block;
+  background: #246b4b;
+  color: white;
+  padding: 14px 24px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.group-primary-button:hover {
+  background: #1d593e;
+  color: white;
+}
+
+.group-secondary-button {
+  display: inline-block;
+  padding: 14px 24px;
+  border: 1px solid #cfd8d2;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #24302b;
+  background: white;
+}
+
+.group-secondary-button:hover {
+  background: #f5f8f5;
+  color: #24302b;
+}
+
+.group-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.group-errors {
+  padding: 14px 18px;
+  margin-bottom: 25px;
+  border-radius: 8px;
+  background: #fff1f1;
+  color: #b34d4d;
+}
+
+.group-errors p {
+  margin: 0;
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.group-header .group-description {
+  margin-bottom: 0;
+}
+
+.group-dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.group-dashboard-card {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.group-dashboard-card h2 {
+  font-size: 22px;
+  margin-bottom: 25px;
+}
+
+.group-muted {
+  color: #78827d;
+}
+
+.group-members {
+  display: flex;
+  flex-direction: column;
+}
+
+.group-member {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.group-member:last-child {
+  border-bottom: none;
+}
+
+.group-member-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e4eee8;
+  color: #246b4b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+  .group-page {
+    padding: 50px 0;
+  }
+
+  .group-form-card {
+    padding: 30px 25px;
+  }
+
+  .group-form-card h1,
+  .group-header h1 {
+    font-size: 34px;
+  }
+
+  .group-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .group-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .group-form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .group-form-actions a,
+  .group-form-actions input {
+    width: 100%;
+    text-align: center;
+  }
+}
+.group-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.group-expenses,
+.group-debts {
+  margin-top: 20px;
+}
+
+.group-expense,
+.group-debt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid #e4e9e5;
+}
+
+.group-expense strong,
+.group-debt strong {
+  color: #24302b;
+}
+
+.group-expense p {
+  margin: 5px 0 0;
+}
+
+.group-debt {
+  color: #66736d;
+}
+
+.group-debt > strong {
+  color: #246b4b;
+}

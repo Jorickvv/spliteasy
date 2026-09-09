@@ -4,13 +4,12 @@
 
       <div class="group-form-card">
 
-        <p class="group-eyebrow">GET STARTED</p>
+        <p class="group-eyebrow">YOUR GROUP</p>
 
-        <h1>Create your group</h1>
+        <h1>Edit your group</h1>
 
         <p class="group-description">
-          Set up your shared space and start splitting expenses
-          with your roommates.
+          Update your group name whenever you need.
         </p>
 
         <%= form_with model: @group, local: true do |form| %>
@@ -27,11 +26,19 @@
             <%= form.label :name, "Group name" %>
 
             <%= form.text_field :name,
-                  placeholder: "e.g. My Flat",
                   autofocus: true %>
           </div>
 
-          <%= form.submit "Create group", class: "group-primary-button" %>
+          <div class="group-form-actions">
+
+            <%= form.submit "Save changes",
+                  class: "group-primary-button" %>
+
+            <%= link_to "Cancel",
+                  @group,
+                  class: "group-secondary-button" %>
+
+          </div>
 
         <% end %>
 

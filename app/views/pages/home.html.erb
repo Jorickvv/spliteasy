@@ -10,9 +10,21 @@
         <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
 
-        <%= link_to "Log in", new_user_session_path, class: "login-link" %>
+      <% if user_signed_in? %>
+  <%= button_to "Log out",
+      destroy_user_session_path,
+      method: :delete,
+      class: "login-link" %>
+<% else %>
+  <%= link_to "Log in",
+      new_user_session_path,
+      class: "login-link" %>
 
-        <%= link_to "Sign up", new_user_registration_path, class: "signup-button" %>
+  <%= link_to "Sign up",
+      new_user_registration_path,
+      class: "signup-button" %>
+<% end %>
+
       </div>
 
     </div>
@@ -39,16 +51,22 @@
           without the awkward math.
         </p>
 
-        <div class="hero-buttons">
+       <div class="hero-buttons">
+  <% if user_signed_in? %>
+  <%= link_to "Get started", new_group_path,
+      class: "primary-button" %>
+<% else %>
+  <%= link_to "Get started", new_user_registration_path,
+      class: "primary-button" %>
+<% end %>
 
-          <%= link_to "Get started", new_user_registration_path,
-              class: "primary-button" %>
+  <%= link_to "Join a group", join_group_path,
+      class: "secondary-button" %>
 
-          <a href="#how-it-works" class="secondary-button">
-            See how it works
-          </a>
-
-        </div>
+  <a href="#how-it-works" class="secondary-button">
+    See how it works
+  </a>
+</div>
 
       </div>
 

@@ -10,6 +10,7 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "pages/groups";
 
 /* =========================
    GENERAL
@@ -397,4 +398,89 @@ a {
   .footer-links {
     flex-wrap: wrap;
   }
+}
+
+/* Authentication */
+
+.auth-page {
+  min-height: calc(100vh - 80px);
+  background: #f5f8f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  background: #ffffff;
+  padding: 42px;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(36, 48, 43, 0.08);
+}
+
+.auth-header {
+  margin-bottom: 30px;
+}
+
+.auth-eyebrow {
+  margin-bottom: 10px;
+  color: #246b4b;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.auth-header h1 {
+  margin-bottom: 12px;
+  color: #24302b;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.auth-header p:last-child {
+  color: #66736d;
+  line-height: 1.6;
+}
+
+.auth-form {
+  margin-bottom: 10px;
+}
+
+.auth-input {
+  width: 100%;
+}
+
+.auth-actions {
+  margin-top: 24px;
+}
+
+.auth-primary-button {
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #246b4b;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-primary-button:hover {
+  background: #1d593e;
+}
+
+.auth-links {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.auth-links a {
+  color: #246b4b;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
 }
