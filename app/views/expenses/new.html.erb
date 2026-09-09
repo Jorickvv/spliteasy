@@ -1,22 +1,63 @@
-<h1>Add Expense</h1>
+<div class="group-page">
+  <div class="container">
+    <div class="group-form-wrapper">
+      <div class="group-form-card">
 
-<%= form_with model: [@group, @expense] do |form| %>
+        <p class="group-eyebrow">NEW EXPENSE</p>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_field :description %>
+        <h1>Add an expense</h1>
+
+        <p class="group-description">
+          Add something you paid for and SplitEasy will split it equally
+          between everyone in the group.
+        </p>
+
+        <%= form_with model: [@group, @expense], local: true do |form| %>
+
+          <% if @expense.errors.any? %>
+            <div class="group-errors">
+              <% @expense.errors.full_messages.each do |message| %>
+                <p><%= message %></p>
+              <% end %>
+            </div>
+          <% end %>
+
+          <div class="group-field">
+            <%= form.label :description, "What did you pay for?" %>
+
+            <%= form.text_field :description,
+                  placeholder: "e.g. Groceries",
+                  autofocus: true %>
+          </div>
+
+          <div class="group-field">
+            <%= form.label :amount, "Amount (€)" %>
+
+            <%= form.number_field :amount,
+                  step: 0.01,
+                  min: 0.01,
+                  placeholder: "0.00" %>
+          </div>
+
+          <div class="group-field">
+            <%= form.label :split_rule, "Split" %>
+
+            <%= form.select :split_rule,
+                  [["Equally between everyone", "equal"]] %>
+          </div>
+
+          <div class="group-form-actions">
+            <%= form.submit "Add expense",
+                  class: "group-primary-button" %>
+
+            <%= link_to "Cancel",
+                  group_path(@group),
+                  class: "group-secondary-button" %>
+          </div>
+
+        <% end %>
+
+      </div>
+    </div>
   </div>
-
-  <div>
-    <%= form.label :amount %>
-    <%= form.number_field :amount, step: 0.01 %>
-  </div>
-
-  <div>
-    <%= form.label :split_rule %>
-    <%= form.select :split_rule, ["equal"] %>
-  </div>
-
-  <%= form.submit "Add Expense" %>
-
-<% end %>
+</div>

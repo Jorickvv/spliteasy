@@ -1,0 +1,170 @@
+<div class="group-page">
+  <div class="container">
+    <div class="group-header">
+      <div>
+        <p class="group-eyebrow">YOUR GROUP</p>
+        <h1><%= @group.name %></h1>
+        <p class="group-description">
+          Manage your shared expenses with your roommates.
+        </p>
+      </div>
+
+      <%= link_to "Edit group",
+            edit_group_path(@group),
+            class: "group-primary-button" %>
+    </div>
+
+    <div class="group-dashboard">
+
+      <!-- GROUP MEMBERS -->
+      <div class="group-dashboard-card">
+        <h2>Group members</h2>
+
+        <% if @group.users.any? %>
+          <div class="group-members">
+            <% @group.users.each do |user| %>
+              <div class="group-member">
+                <div class="group-member-avatar">
+                  <%= user.name.presence&.first&.upcase || user.email.first.upcase %>
+                </div>
+
+                <span>
+                  <%= user.name.presence || user.email %>
+                </span>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="group-muted">No members yet.</p>
+        <% end %>
+      </div>
+
+
+      <!-- EXPENSES -->
+      <div class="group-dashboard-card">
+        <div class="group-card-header">
+          <div>
+            <h2>Expenses</h2>
+            <p class="group-muted">
+              Track everything your group has paid for.
+            </p>
+          </div>
+
+          <%= link_to "Add expense",
+                new_group_expense_path(@group),
+                class: "group-primary-button" %>
+        </div>
+
+        <% if @group.expenses.any? %>
+          <div class="group-expenses">
+            <% @group.expenses.order(created_at: :desc).each do |expense| %>
+              <div class="group-expense">
+                <div>
+                  <strong><%= expense.description %></strong>
+
+                  <p class="group-muted">
+                    €<%= number_with_precision(expense.amount, precision: 2) %>
+                  </p>
+                </div>
+
+                <div>
+                  <% payer = expense.expense_participants.find do |participant|
+                    participant.paid_amount.to_d > 0
+                  end %>
+
+                  <% if payer %>
+                    <span class="group-muted">
+                      Paid by
+                      <%= payer.user.name.presence || payer.user.email %>
+                    </span>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="group-muted">
+            No expenses yet.
+          </p>
+        <% end %>
+      </div>
+
+
+      <!-- YOUR BALANCE -->
+      <div class="group-dashboard-card">
+        <h2>Your balance</h2>
+
+        <% owed_to_you = @group.debts
+             .where(creditor: current_user)
+             .sum(:amount) %>
+
+        <% you_owe = @group.debts
+             .where(debtor: current_user)
+             .sum(:amount) %>
+
+        <% balance = owed_to_you - you_owe %>
+
+        <% if balance > 0 %>
+          <p class="group-balance positive">
+            You are owed
+            <strong>
+              €<%= number_with_precision(balance, precision: 2) %>
+            </strong>
+          </p>
+
+        <% elsif balance < 0 %>
+          <p class="group-balance negative">
+            You owe
+            <strong>
+              €<%= number_with_precision(balance.abs, precision: 2) %>
+            </strong>
+          </p>
+
+        <% else %>
+          <p class="group-balance">
+            You are all settled up 🎉
+          </p>
+        <% end %>
+      </div>
+
+
+      <!-- WHO OWES WHOM -->
+      <div class="group-dashboard-card">
+        <h2>Who owes whom</h2>
+
+        <% if @group.debts.any? %>
+          <div class="group-debts">
+
+            <% @group.debts.order(created_at: :desc).each do |debt| %>
+
+              <div class="group-debt">
+                <span>
+                  <strong>
+                    <%= debt.debtor == current_user ? "you" : (debt.debtor.name.presence || debt.debtor.email) %>
+                  </strong>
+
+                  owes
+
+                  <strong>
+                    <%= debt.creditor == current_user ? "you" : (debt.creditor.name.presence || debt.creditor.email) %>
+                  </strong>
+                </span>
+
+                <strong>
+                  €<%= number_with_precision(debt.amount, precision: 2) %>
+                </strong>
+              </div>
+
+            <% end %>
+
+          </div>
+        <% else %>
+          <p class="group-muted">
+            No debts yet.
+          </p>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
