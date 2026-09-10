@@ -422,3 +422,89 @@
     width: 100%;
   }
 }
+.expense-help-text {
+  margin: -8px 0 12px;
+  color: #6b7b82;
+  font-size: 14px;
+}
+
+.expense-participants {
+  display: block;
+  width: 100%;
+  border: 1px solid #e3ebe7;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.expense-participant {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 16px 18px;
+  margin: 0;
+  background: #fff;
+  border-bottom: 1px solid #e3ebe7;
+  cursor: pointer;
+}
+
+.expense-participant:last-child {
+  border-bottom: none;
+}
+
+.expense-participant:hover {
+  background: #f4f8f6;
+}
+
+.expense-participant input[type="checkbox"] {
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px;
+  margin: 0 !important;
+  flex: 0 0 18px;
+  accent-color: #237653;
+}
+
+.expense-participant-info {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 3px;
+}
+
+.expense-participant-info strong {
+  color: #132f3d;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.expense-participant-info small {
+  color: #7a898f;
+  font-size: 13px;
+}
+.group-debt-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.debt-settle-button {
+  padding: 8px 14px;
+  border: 1px solid #237653;
+  border-radius: 8px;
+  background: transparent;
+  color: #237653;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.debt-settle-button:hover {
+  background: #237653;
+  color: #fff;
+}

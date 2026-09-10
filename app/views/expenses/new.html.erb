@@ -48,39 +48,50 @@
           <!-- WHO PAID -->
 
           <div class="group-field">
-            <%= form.label :payer_id, "Who paid?" %>
+  <%= form.label :payer_id, "Who paid?" %>
 
-            <%= form.collection_select :payer_id,
-                  @group.users,
-                  :id,
-                  :name,
-                  { prompt: "Select who paid" } %>
-          </div>
+  <%= select_tag "expense[payer_id]",
+        options_for_select(
+          @group.users.map do |user|
+            [
+              user.name.presence || user.email,
+              user.id
+            ]
+          end
+        ),
+        prompt: "Select who paid" %>
+</div>
 
 
           <!-- PARTICIPANTS -->
 
           <div class="group-field">
-            <%= form.label :participant_ids, "Who shares this expense?" %>
+  <%= form.label :participant_ids, "Who shares this expense?" %>
 
-            <div class="expense-participants">
+  <p class="expense-help-text">
+    Select everyone who should split the cost.
+  </p>
 
-              <% @group.users.each do |user| %>
+  <div class="expense-participants">
+    <% @group.users.each do |user| %>
+      <label class="expense-participant">
+        <%= check_box_tag "expense[participant_ids][]",
+              user.id,
+              true %>
 
-                <label class="expense-participant">
-                  <%= check_box_tag "expense[participant_ids][]",
-                        user.id,
-                        true %>
+        <span class="expense-participant-info">
+          <strong>
+            <%= user.name.presence || user.email %>
+          </strong>
 
-                  <span>
-                    <%= user.name.presence || user.email %>
-                  </span>
-                </label>
-
-              <% end %>
-
-            </div>
-          </div>
+          <small>
+            Shares this expense
+          </small>
+        </span>
+      </label>
+    <% end %>
+  </div>
+</div>
 
 
           <!-- SPLIT -->
