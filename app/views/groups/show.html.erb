@@ -57,8 +57,11 @@
 
         <% if @group.expenses.any? %>
           <div class="group-expenses">
+
             <% @group.expenses.order(created_at: :desc).each do |expense| %>
+
               <div class="group-expense">
+
                 <div>
                   <strong><%= expense.description %></strong>
 
@@ -67,20 +70,35 @@
                   </p>
                 </div>
 
-                <div>
-                  <% payer = expense.expense_participants.find do |participant|
-                    participant.paid_amount.to_d > 0
-                  end %>
+                <div class="expense-actions">
 
-                  <% if payer %>
-                    <span class="group-muted">
-                      Paid by
-                      <%= payer.user.name.presence || payer.user.email %>
-                    </span>
-                  <% end %>
+                  <div>
+                    <% payer = expense.expense_participants.find do |participant|
+                      participant.paid_amount.to_d > 0
+                    end %>
+
+                    <% if payer %>
+                      <span class="group-muted">
+                        Paid by
+                        <%= payer.user.name.presence || payer.user.email %>
+                      </span>
+                    <% end %>
+                  </div>
+
+                  <%= button_to "Delete",
+      group_expense_path(@group, expense),
+      method: :delete,
+      data: {
+        turbo_confirm: "Are you sure you want to delete this expense?"
+      },
+      class: "expense-delete-button" %>
+
                 </div>
+
               </div>
+
             <% end %>
+
           </div>
         <% else %>
           <p class="group-muted">

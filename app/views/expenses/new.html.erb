@@ -8,8 +8,8 @@
         <h1>Add an expense</h1>
 
         <p class="group-description">
-          Add something you paid for and SplitEasy will split it equally
-          between everyone in the group.
+          Add something you paid for and SplitEasy will split it
+          between the selected roommates.
         </p>
 
         <%= form_with model: [@group, @expense], local: true do |form| %>
@@ -22,6 +22,8 @@
             </div>
           <% end %>
 
+          <!-- DESCRIPTION -->
+
           <div class="group-field">
             <%= form.label :description, "What did you pay for?" %>
 
@@ -29,6 +31,9 @@
                   placeholder: "e.g. Groceries",
                   autofocus: true %>
           </div>
+
+
+          <!-- AMOUNT -->
 
           <div class="group-field">
             <%= form.label :amount, "Amount (€)" %>
@@ -39,20 +44,66 @@
                   placeholder: "0.00" %>
           </div>
 
+
+          <!-- WHO PAID -->
+
+          <div class="group-field">
+            <%= form.label :payer_id, "Who paid?" %>
+
+            <%= form.collection_select :payer_id,
+                  @group.users,
+                  :id,
+                  :name,
+                  { prompt: "Select who paid" } %>
+          </div>
+
+
+          <!-- PARTICIPANTS -->
+
+          <div class="group-field">
+            <%= form.label :participant_ids, "Who shares this expense?" %>
+
+            <div class="expense-participants">
+
+              <% @group.users.each do |user| %>
+
+                <label class="expense-participant">
+                  <%= check_box_tag "expense[participant_ids][]",
+                        user.id,
+                        true %>
+
+                  <span>
+                    <%= user.name.presence || user.email %>
+                  </span>
+                </label>
+
+              <% end %>
+
+            </div>
+          </div>
+
+
+          <!-- SPLIT -->
+
           <div class="group-field">
             <%= form.label :split_rule, "Split" %>
 
             <%= form.select :split_rule,
-                  [["Equally between everyone", "equal"]] %>
+                  [["Equally between selected people", "equal"]] %>
           </div>
 
+
+          <!-- ACTIONS -->
+
           <div class="group-form-actions">
+
             <%= form.submit "Add expense",
                   class: "group-primary-button" %>
 
             <%= link_to "Cancel",
                   group_path(@group),
                   class: "group-secondary-button" %>
+
           </div>
 
         <% end %>

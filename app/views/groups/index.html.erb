@@ -1,11 +1,113 @@
-<h1>My Groups</h1>
+<div class="group-page">
+  <div class="container">
 
-<%= link_to "Create Group", new_group_path %>
+    <div class="group-header">
+      <div>
+        <p class="group-eyebrow">YOUR GROUPS</p>
+        <h1>My groups</h1>
+        <p class="group-description">
+          Manage your shared expenses and keep track of what everyone owes.
+        </p>
+      </div>
 
-<ul>
-  <% @groups.each do |group| %>
-    <li>
-      <%= link_to group.name, group_path(group) %>
-    </li>
-  <% end %>
-</ul>
+      <div class="group-form-actions">
+        <%= link_to "Join a group",
+              join_group_path,
+              class: "group-secondary-button" %>
+
+        <%= link_to "Create a group",
+              new_group_path,
+              class: "group-primary-button" %>
+      </div>
+    </div>
+
+    <% if @groups.any? %>
+
+      <div class="groups-grid">
+        <% @groups.each do |group| %>
+
+          <div class="group-dashboard-card group-list-card">
+
+            <div class="group-list-card-header">
+              <div class="group-list-icon">
+                <%= group.name.to_s.first&.upcase || "G" %>
+              </div>
+
+              <div>
+                <h2><%= group.name %></h2>
+
+                <p class="group-muted">
+                  <%= pluralize(group.users.count, "roommate") %>
+                </p>
+              </div>
+            </div>
+
+            <% owed_to_you = group.debts
+                 .where(creditor: current_user)
+                 .sum(:amount) %>
+
+            <% you_owe = group.debts
+                 .where(debtor: current_user)
+                 .sum(:amount) %>
+
+            <% balance = owed_to_you - you_owe %>
+
+            <div class="group-list-balance">
+              <% if balance > 0 %>
+                <span class="group-muted">You are owed</span>
+
+                <strong class="balance-positive">
+                  €<%= number_with_precision(balance, precision: 2) %>
+                </strong>
+
+              <% elsif balance < 0 %>
+                <span class="group-muted">You owe</span>
+
+                <strong class="balance-negative">
+                  €<%= number_with_precision(balance.abs, precision: 2) %>
+                </strong>
+
+              <% else %>
+                <span class="group-muted">
+                  You are all settled up 🎉
+                </span>
+              <% end %>
+            </div>
+
+            <div class="group-list-card-footer">
+              <%= link_to "View group →",
+                    group_path(group),
+                    class: "group-card-link" %>
+            </div>
+
+          </div>
+
+        <% end %>
+      </div>
+
+    <% else %>
+
+      <div class="group-dashboard-card group-empty-state">
+        <div class="group-list-icon">+</div>
+
+        <h2>No groups yet</h2>
+
+        <p class="group-muted">
+          Create a group or join your roommates using an invite code.
+        </p>
+
+        <div class="group-form-actions">
+          <%= link_to "Create a group",
+                new_group_path,
+                class: "group-primary-button" %>
+
+          <%= link_to "Join a group",
+                join_group_path,
+                class: "group-secondary-button" %>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
