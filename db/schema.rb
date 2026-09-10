@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_09_121457) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_10_110939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_09_121457) do
     t.integer "debtor_id"
     t.bigint "expense_id", null: false
     t.bigint "group_id", null: false
+    t.boolean "settled"
     t.datetime "updated_at", null: false
     t.index ["expense_id"], name: "index_debts_on_expense_id"
     t.index ["group_id"], name: "index_debts_on_group_id"

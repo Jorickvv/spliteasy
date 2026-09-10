@@ -150,28 +150,38 @@
       <div class="group-dashboard-card">
         <h2>Who owes whom</h2>
 
-        <% if @group.debts.any? %>
+        <% if @group.debts.active.any? %>
           <div class="group-debts">
 
-            <% @group.debts.order(created_at: :desc).each do |debt| %>
+            <% @group.debts.active.order(created_at: :desc).each do |debt| %>
 
-              <div class="group-debt">
-                <span>
-                  <strong>
-                    <%= debt.debtor == current_user ? "you" : (debt.debtor.name.presence || debt.debtor.email) %>
-                  </strong>
+             <div class="group-debt">
+  <span>
+    <strong>
+      <%= debt.debtor == current_user ? "you" : (debt.debtor.name.presence || debt.debtor.email) %>
+    </strong>
+    owes
+    <strong>
+      <%= debt.creditor == current_user ? "you" : (debt.creditor.name.presence || debt.creditor.email) %>
+    </strong>
+  </span>
 
-                  owes
+  <div class="group-debt-actions">
+    <strong>
+      €<%= number_with_precision(debt.amount, precision: 2) %>
+    </strong>
 
-                  <strong>
-                    <%= debt.creditor == current_user ? "you" : (debt.creditor.name.presence || debt.creditor.email) %>
-                  </strong>
-                </span>
-
-                <strong>
-                  €<%= number_with_precision(debt.amount, precision: 2) %>
-                </strong>
-              </div>
+    <% if debt.debtor == current_user || debt.creditor == current_user %>
+      <%= button_to "Settle up",
+            settle_group_debt_path(@group, debt),
+            method: :patch,
+            class: "debt-settle-button",
+            data: {
+              turbo_confirm: "Mark this debt as settled?"
+            } %>
+    <% end %>
+  </div>
+</div>
 
             <% end %>
 
