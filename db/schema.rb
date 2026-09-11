@@ -21,7 +21,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_10_110939) do
     t.integer "debtor_id"
     t.bigint "expense_id", null: false
     t.bigint "group_id", null: false
-    t.boolean "settled"
+    t.boolean "settled", default: false, null: false
     t.datetime "updated_at", null: false
     t.index ["expense_id"], name: "index_debts_on_expense_id"
     t.index ["group_id"], name: "index_debts_on_group_id"
