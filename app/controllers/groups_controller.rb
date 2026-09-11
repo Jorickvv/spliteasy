@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_group, only: %i[show edit update]
+  before_action :set_group, only: %i[show edit update destroy]
 
   def index
     @groups = current_user.groups
@@ -37,6 +37,12 @@ class GroupsController < ApplicationController
     else
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @group.destroy
+
+    redirect_to groups_path, notice: "Group deleted."
   end
 
   def join
