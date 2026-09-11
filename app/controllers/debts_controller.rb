@@ -10,7 +10,10 @@ class DebtsController < ApplicationController
       return
     end
 
-    @debt.update!(settled: true)
+    @group.debts.active.where(
+      debtor_id: @debt.debtor_id,
+      creditor_id: @debt.creditor_id
+    ).update_all(settled: true)
 
     redirect_to group_path(@group), notice: "Debt settled."
   end
