@@ -554,3 +554,34 @@
   background: #237653;
   color: #fff;
 }
+.group-navigation {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.group-navigation-link {
+  color: #237653;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.group-navigation-link:hover {
+  text-decoration: underline;
+}
+.group-delete-button {
+  margin-top: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #b34d4d;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.group-delete-button:hover {
+  text-decoration: underline;
+}

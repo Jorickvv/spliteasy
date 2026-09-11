@@ -1,35 +1,42 @@
 <<div class="home-page">
+<!-- Navigation -->
+<nav class="navbar">
+  <div class="container navbar-content">
 
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container navbar-content">
+    <%= link_to "SplitEasy", root_path, class: "logo" %>
 
-      <%= link_to "SplitEasy", root_path, class: "logo" %>
+    <div class="nav-links">
 
-      <div class="nav-links">
-        <a href="#how-it-works">How it works</a>
-        <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+
+      <a href="#features">Features</a>
 
       <% if user_signed_in? %>
-  <%= button_to "Log out",
+
+        <%= link_to "My Groups",
+              groups_path,
+              class: "login-link" %>
+
+        <%= button_to "Log out",
       destroy_user_session_path,
       method: :delete,
-      class: "login-link" %>
-<% else %>
-  <%= link_to "Log in",
-      new_user_session_path,
-      class: "login-link" %>
+      class: "logout-link" %>
 
-  <%= link_to "Sign up",
-      new_user_registration_path,
-      class: "signup-button" %>
-<% end %>
+      <% else %>
 
-      </div>
+        <%= link_to "Log in",
+              new_user_session_path,
+              class: "login-link" %>
+
+        <%= link_to "Sign up",
+              new_user_registration_path,
+              class: "signup-button" %>
+
+      <% end %>
 
     </div>
-  </nav>
-
+  </div>
+</nav>
 
   <!-- Hero -->
   <section class="hero">

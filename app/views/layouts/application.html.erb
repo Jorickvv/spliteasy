@@ -1,15 +1,48 @@
 <!DOCTYPE html>
+
 <html>
   <head>
-    <title>Spliteasy</title>
+    <title>SplitEasy</title>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application" %>
     <%= stylesheet_link_tag "devise", media: "all" %>
 
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+
+    <% unless controller_name == "pages" && action_name == "home" %>
+      <nav class="app-navigation">
+        <div class="app-navigation-inner">
+
+          <%= link_to "SplitEasy", root_path, class: "app-navigation-brand" %>
+
+          <div class="app-navigation-links">
+            <%= link_to "Home", root_path, class: "app-navigation-link" %>
+
+            <% if user_signed_in? %>
+              <%= link_to "My Groups", groups_path, class: "app-navigation-link" %>
+
+              <%= link_to "Join a group", join_group_path, class: "app-navigation-link" %>
+
+              <%= button_to "Log out",
+                    destroy_user_session_path,
+                    method: :delete,
+                    class: "app-navigation-logout" %>
+            <% end %>
+          </div>
+
+        </div>
+      </nav>
+    <% end %>
+
     <%= yield %>
+
   </body>
 </html>

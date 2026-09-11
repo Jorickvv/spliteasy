@@ -484,3 +484,89 @@ a {
 .auth-links a:hover {
   text-decoration: underline;
 }
+/* =========================
+   APP NAVIGATION
+========================= */
+
+.app-navigation {
+  padding: 18px 0;
+  background: #ffffff;
+  border-bottom: 1px solid #e5ebe7;
+}
+
+.app-navigation-inner {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.app-navigation-brand {
+  color: #246b4b;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.app-navigation-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.app-navigation-link {
+  color: #24302b;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.app-navigation-link:hover {
+  color: #246b4b;
+}
+
+.app-navigation-logout {
+  padding: 8px 14px;
+  border: 1px solid #cfd8d2;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #24302b;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.app-navigation-logout:hover {
+  border-color: #246b4b;
+  color: #246b4b;
+}
+
+@media (max-width: 800px) {
+  .app-navigation-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .app-navigation-links {
+    flex-wrap: wrap;
+    gap: 14px 20px;
+  }
+}
+.logout-link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: #24302b;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.logout-link:hover {
+  color: #246b4b;
+}
