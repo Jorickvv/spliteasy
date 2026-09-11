@@ -1,5 +1,6 @@
 <div class="group-page">
   <div class="container">
+
     <div class="group-header">
       <div>
         <p class="group-eyebrow">YOUR GROUP</p>
@@ -37,14 +38,34 @@
         <% else %>
           <p class="group-muted">No members yet.</p>
         <% end %>
-      </div>
 
+        <!-- INVITE ROOMMATES -->
+        <div class="group-invite">
+          <h3>Invite roommates</h3>
+
+          <p class="group-muted">
+            Share this code with your roommates so they can join your group.
+          </p>
+
+          <div class="group-invite-code">
+            <strong id="invite-code"><%= @group.invite_code %></strong>
+
+            <button
+              type="button"
+              class="group-copy-button"
+              onclick="navigator.clipboard.writeText('<%= @group.invite_code %>'); this.textContent = 'Copied!'">
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!-- EXPENSES -->
       <div class="group-dashboard-card">
         <div class="group-card-header">
           <div>
             <h2>Expenses</h2>
+
             <p class="group-muted">
               Track everything your group has paid for.
             </p>
@@ -63,7 +84,9 @@
               <div class="group-expense">
 
                 <div>
-                  <strong><%= expense.description %></strong>
+                  <strong>
+                    <%= expense.description %>
+                  </strong>
 
                   <p class="group-muted">
                     €<%= number_with_precision(expense.amount, precision: 2) %>
@@ -86,15 +109,14 @@
                   </div>
 
                   <%= button_to "Delete",
-      group_expense_path(@group, expense),
-      method: :delete,
-      data: {
-        turbo_confirm: "Are you sure you want to delete this expense?"
-      },
-      class: "expense-delete-button" %>
+                        group_expense_path(@group, expense),
+                        method: :delete,
+                        data: {
+                          turbo_confirm: "Are you sure you want to delete this expense?"
+                        },
+                        class: "expense-delete-button" %>
 
                 </div>
-
               </div>
 
             <% end %>
@@ -107,89 +129,157 @@
         <% end %>
       </div>
 
-
       <!-- YOUR BALANCE -->
       <div class="group-dashboard-card">
         <h2>Your balance</h2>
 
         <% owed_to_you = @group.debts
-             .where(creditor: current_user)
+             .where(creditor: current_user, settled: false)
              .sum(:amount) %>
 
         <% you_owe = @group.debts
-             .where(debtor: current_user)
+             .where(debtor: current_user, settled: false)
              .sum(:amount) %>
 
         <% balance = owed_to_you - you_owe %>
 
         <% if balance > 0 %>
+
           <p class="group-balance positive">
             You are owed
+
             <strong>
               €<%= number_with_precision(balance, precision: 2) %>
             </strong>
           </p>
 
         <% elsif balance < 0 %>
+
           <p class="group-balance negative">
             You owe
+
             <strong>
               €<%= number_with_precision(balance.abs, precision: 2) %>
             </strong>
           </p>
 
         <% else %>
+
           <p class="group-balance">
             You are all settled up 🎉
           </p>
+
         <% end %>
       </div>
 
+     <!-- WHO OWES WHOM -->
+<div class="group-dashboard-card">
+  <h2>Who owes whom</h2>
 
-      <!-- WHO OWES WHOM -->
-      <div class="group-dashboard-card">
-        <h2>Who owes whom</h2>
+  <% active_debts = @group.debts.active %>
 
-        <% if @group.debts.active.any? %>
-          <div class="group-debts">
+  <% if active_debts.any? %>
 
-            <% @group.debts.active.order(created_at: :desc).each do |debt| %>
+    <% grouped_debts = active_debts.group_by { |debt| [debt.debtor_id, debt.creditor_id] } %>
 
-             <div class="group-debt">
-  <span>
-    <strong>
-      <%= debt.debtor == current_user ? "you" : (debt.debtor.name.presence || debt.debtor.email) %>
-    </strong>
-    owes
-    <strong>
-      <%= debt.creditor == current_user ? "you" : (debt.creditor.name.presence || debt.creditor.email) %>
-    </strong>
-  </span>
+    <div class="group-debts">
 
-  <div class="group-debt-actions">
-    <strong>
-      €<%= number_with_precision(debt.amount, precision: 2) %>
-    </strong>
+      <% grouped_debts.each do |(debtor_id, creditor_id), debts| %>
 
-    <% if debt.debtor == current_user || debt.creditor == current_user %>
-      <%= button_to "Settle up",
-            settle_group_debt_path(@group, debt),
-            method: :patch,
-            class: "debt-settle-button",
-            data: {
-              turbo_confirm: "Mark this debt as settled?"
-            } %>
-    <% end %>
-  </div>
-</div>
+        <% total_amount = debts.sum(&:amount) %>
+        <% debtor = debts.first.debtor %>
+        <% creditor = debts.first.creditor %>
+
+        <div class="group-debt">
+
+          <span>
+            <strong>
+              <%= debtor == current_user ? "you" : (debtor.name.presence || debtor.email) %>
+            </strong>
+
+            owes
+
+            <strong>
+              <%= creditor == current_user ? "you" : (creditor.name.presence || creditor.email) %>
+            </strong>
+          </span>
+
+          <div class="group-debt-actions">
+
+            <strong>
+              €<%= number_with_precision(total_amount, precision: 2) %>
+            </strong>
+
+            <% if debtor == current_user || creditor == current_user %>
+
+              <%= button_to "Settle up",
+                    settle_group_debt_path(@group, debts.first),
+                    method: :patch,
+                    class: "debt-settle-button",
+                    data: {
+                      turbo_confirm: "Mark this debt as settled?"
+                    } %>
 
             <% end %>
 
           </div>
+        </div>
+
+      <% end %>
+
+    </div>
+
+  <% else %>
+
+    <p class="group-muted">
+      No active debts 🎉
+    </p>
+
+  <% end %>
+</div>
+
+      <!-- SETTLED PAYMENTS -->
+      <div class="group-dashboard-card">
+        <h2>Settled payments</h2>
+
+        <% settled_debts = @group.debts.settled.order(created_at: :desc) %>
+
+        <% if settled_debts.any? %>
+
+          <div class="group-debts">
+
+            <% settled_debts.each do |debt| %>
+
+              <div class="group-debt">
+
+                <span>
+                  <strong>
+                    <%= debt.debtor == current_user ? "you" : (debt.debtor.name.presence || debt.debtor.email) %>
+                  </strong>
+
+                  paid
+
+                  <strong>
+                    <%= debt.creditor == current_user ? "you" : (debt.creditor.name.presence || debt.creditor.email) %>
+                  </strong>
+                </span>
+
+                <strong>
+                  €<%= number_with_precision(debt.amount, precision: 2) %>
+                </strong>
+
+              </div>
+
+            <% end %>
+
+          </div>
+
         <% else %>
+
           <p class="group-muted">
-            No debts yet.
+            No settled payments yet.
           </p>
+
         <% end %>
       </div>
 

@@ -508,3 +508,49 @@
   background: #237653;
   color: #fff;
 }
+.group-invite {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e3ebe7;
+}
+
+.group-invite h3 {
+  margin: 0 0 8px;
+  color: #132f3d;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.group-invite-code {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border: 1px solid #dce8e2;
+  border-radius: 10px;
+  background: #f4f8f6;
+}
+
+.group-invite-code strong {
+  color: #237653;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.group-copy-button {
+  padding: 7px 12px;
+  border: 1px solid #237653;
+  border-radius: 7px;
+  background: #fff;
+  color: #237653;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.group-copy-button:hover {
+  background: #237653;
+  color: #fff;
+}
