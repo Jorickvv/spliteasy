@@ -570,3 +570,169 @@ a {
 .logout-link:hover {
   color: #246b4b;
 }
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-page .footer {
+  margin-top: auto;
+}
+
+/* =========================
+   HOVER ANIMATION
+========================= */
+
+.primary-button,
+.secondary-button,
+.feature-card,
+.balance-card {
+  transition: transform 0.2s ease;
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.feature-card:hover,
+.balance-card:hover {
+  animation: little-shake 0.3s ease-in-out;
+}
+
+@keyframes little-shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-2px) rotate(-0.5deg);
+  }
+
+  50% {
+    transform: translateX(2px) rotate(0.5deg);
+  }
+
+  75% {
+    transform: translateX(-2px) rotate(-0.5deg);
+  }
+
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+}
+
+/* Floating background */
+/* Floating background lights */
+
+.home-page {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-page::before {
+  content: "";
+  position: absolute;
+
+  width: 450px;
+  height: 450px;
+
+  background: rgba(100, 200, 170, 0.18);
+  border-radius: 50%;
+
+  filter: blur(60px);
+
+  top: 50px;
+  left: -150px;
+
+  pointer-events: none;
+  z-index: 0;
+
+  animation: float-light 8s ease-in-out infinite;
+}
+
+@keyframes float-light {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(150px, 80px);
+  }
+
+  50% {
+    transform: translate(300px, 20px);
+  }
+
+  75% {
+    transform: translate(150px, 120px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* =========================
+   BUTTON HOVER SHAKE
+========================= */
+
+.primary-button,
+.secondary-button,
+.signup-button,
+.login-link,
+.logout-link,
+.group-primary-button,
+.group-secondary-button,
+.group-delete-button,
+.group-card-link,
+input[type="submit"],
+button {
+  transition: transform 0.15s ease;
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.signup-button:hover,
+.login-link:hover,
+.logout-link:hover,
+.group-primary-button:hover,
+.group-secondary-button:hover,
+.group-delete-button:hover,
+.group-card-link:hover,
+input[type="submit"]:hover,
+button:hover {
+  animation: button-shake 0.3s ease-in-out;
+}
+
+@keyframes button-shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+
+  75% {
+    transform: translateX(-2px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
