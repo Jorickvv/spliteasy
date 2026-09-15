@@ -35,14 +35,29 @@
 
           <!-- AMOUNT -->
 
-          <div class="group-field">
-            <%= form.label :amount, "Amount (€)" %>
+         <!-- CURRENCY -->
+<div class="group-field">
+  <%= form.label :currency, "Currency" %>
 
-            <%= form.number_field :amount,
-                  step: 0.01,
-                  min: 0.01,
-                  placeholder: "0.00" %>
-          </div>
+  <%= form.select :currency,
+        [
+          ["£ GBP — British Pound", "GBP"],
+          ["€ EUR — Euro", "EUR"],
+          ["$ USD — US Dollar", "USD"]
+        ],
+        {},
+        class: "group-select" %>
+</div>
+
+<!-- AMOUNT -->
+<div class="group-field">
+  <%= form.label :amount, "Amount" %>
+
+  <%= form.number_field :amount,
+        step: 0.01,
+        min: 0.01,
+        placeholder: "0.00" %>
+</div>
 
 
           <!-- WHO PAID -->

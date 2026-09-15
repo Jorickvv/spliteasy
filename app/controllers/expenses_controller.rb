@@ -34,6 +34,8 @@ class ExpensesController < ApplicationController
       return
     end
 
+    set_exchange_rate
+
     if @expense.save
       calculate_equal_split(participants, payer)
       create_debts(payer)
@@ -59,19 +61,26 @@ class ExpensesController < ApplicationController
     params.require(:expense).permit(
       :description,
       :amount,
+      :currency,
       :split_rule
     )
   end
 
+  def set_exchange_rate
+    @expense.exchange_rate =
+      ExchangeRateService.to_gbp(@expense.currency)
+  end
+
   def calculate_equal_split(participants, payer)
-    share = @expense.amount / participants.count
+    amount_in_gbp = @expense.amount * @expense.exchange_rate
+    share_in_gbp = amount_in_gbp / participants.count
 
     participants.each do |user|
       ExpenseParticipant.create!(
         expense: @expense,
         user: user,
-        paid_amount: user == payer ? @expense.amount : 0,
-        owed_amount: share
+        paid_amount: user == payer ? amount_in_gbp : 0,
+        owed_amount: share_in_gbp
       )
     end
   end

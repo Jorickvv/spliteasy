@@ -95,7 +95,14 @@
                   </strong>
 
                   <p class="group-muted">
-                    €<%= number_with_precision(expense.amount, precision: 2) %>
+                    <% currency_symbol = {
+                      "GBP" => "£",
+                      "EUR" => "€",
+                      "USD" => "$"
+                    }[expense.currency || "EUR"] %>
+
+                    <%= currency_symbol %><%= number_with_precision(expense.amount, precision: 2) %>
+                    <%= expense.currency || "EUR" %>
                   </p>
                 </div>
 
@@ -155,7 +162,7 @@
             You are owed
 
             <strong>
-              €<%= number_with_precision(balance, precision: 2) %>
+              £<%= number_with_precision(balance, precision: 2) %>
             </strong>
           </p>
 
@@ -165,7 +172,7 @@
             You owe
 
             <strong>
-              €<%= number_with_precision(balance.abs, precision: 2) %>
+              £<%= number_with_precision(balance.abs, precision: 2) %>
             </strong>
           </p>
 
@@ -178,71 +185,71 @@
         <% end %>
       </div>
 
-     <!-- WHO OWES WHOM -->
-<div class="group-dashboard-card">
-  <h2>Who owes whom</h2>
+      <!-- WHO OWES WHOM -->
+      <div class="group-dashboard-card">
+        <h2>Who owes whom</h2>
 
-  <% active_debts = @group.debts.active %>
+        <% active_debts = @group.debts.active %>
 
-  <% if active_debts.any? %>
+        <% if active_debts.any? %>
 
-    <% grouped_debts = active_debts.group_by { |debt| [debt.debtor_id, debt.creditor_id] } %>
+          <% grouped_debts = active_debts.group_by { |debt| [debt.debtor_id, debt.creditor_id] } %>
 
-    <div class="group-debts">
+          <div class="group-debts">
 
-      <% grouped_debts.each do |(debtor_id, creditor_id), debts| %>
+            <% grouped_debts.each do |(debtor_id, creditor_id), debts| %>
 
-        <% total_amount = debts.sum(&:amount) %>
-        <% debtor = debts.first.debtor %>
-        <% creditor = debts.first.creditor %>
+              <% total_amount = debts.sum(&:amount) %>
+              <% debtor = debts.first.debtor %>
+              <% creditor = debts.first.creditor %>
 
-        <div class="group-debt">
+              <div class="group-debt">
 
-          <span>
-            <strong>
-              <%= debtor == current_user ? "you" : (debtor.name.presence || debtor.email) %>
-            </strong>
+                <span>
+                  <strong>
+                    <%= debtor == current_user ? "you" : (debtor.name.presence || debtor.email) %>
+                  </strong>
 
-            owes
+                  owes
 
-            <strong>
-              <%= creditor == current_user ? "you" : (creditor.name.presence || creditor.email) %>
-            </strong>
-          </span>
+                  <strong>
+                    <%= creditor == current_user ? "you" : (creditor.name.presence || creditor.email) %>
+                  </strong>
+                </span>
 
-          <div class="group-debt-actions">
+                <div class="group-debt-actions">
 
-            <strong>
-              €<%= number_with_precision(total_amount, precision: 2) %>
-            </strong>
+                  <strong>
+                    £<%= number_with_precision(total_amount, precision: 2) %>
+                  </strong>
 
-            <% if debtor == current_user || creditor == current_user %>
+                  <% if debtor == current_user || creditor == current_user %>
 
-              <%= button_to "Settle up",
-                    settle_group_debt_path(@group, debts.first),
-                    method: :patch,
-                    class: "debt-settle-button",
-                    data: {
-                      turbo_confirm: "Mark this debt as settled?"
-                    } %>
+                    <%= button_to "Settle up",
+                          settle_group_debt_path(@group, debts.first),
+                          method: :patch,
+                          class: "debt-settle-button",
+                          data: {
+                            turbo_confirm: "Mark this debt as settled?"
+                          } %>
+
+                  <% end %>
+
+                </div>
+              </div>
 
             <% end %>
 
           </div>
-        </div>
 
-      <% end %>
+        <% else %>
 
-    </div>
+          <p class="group-muted">
+            No active debts 🎉
+          </p>
 
-  <% else %>
-
-    <p class="group-muted">
-      No active debts 🎉
-    </p>
-
-  <% end %>
-</div>
+        <% end %>
+      </div>
 
       <!-- SETTLED PAYMENTS -->
       <div class="group-dashboard-card">
@@ -271,7 +278,7 @@
                 </span>
 
                 <strong>
-                  €<%= number_with_precision(debt.amount, precision: 2) %>
+                  £<%= number_with_precision(debt.amount, precision: 2) %>
                 </strong>
 
               </div>
